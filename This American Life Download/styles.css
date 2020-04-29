@@ -1,0 +1,17 @@
+.download-link {
+    display: block;
+    border: none !important; /* Need to override other styling */
+    margin-top: 25px;
+    height: 50px;
+    background: #ec0000;
+    font-size: 20px;
+    line-height: 50px; /* Has to be equal to height for download to be centered horizontally */
+    text-align: center;
+    text-decoration: none;
+    opacity: 0.9;
+}
+
+.download-link:hover {
+    cursor: pointer;
+    background: #c50303;
+}

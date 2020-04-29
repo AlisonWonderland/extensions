@@ -1,33 +1,17 @@
-const body = document.querySelector("body");
-const item = document.getElementById("item");
+let playBtn = document.querySelector("a.play");
+let playBtnContainer = document.querySelector("div.episode-title");
+let playBtnClicked = false;
 
-console.log(item);
+playBtn.addEventListener("click", () => {
+    if(!playBtnClicked) {
+        let downloadAnchor = document.createElement("a");
+        let mp3Link = document.getElementById("jp_audio_0").getAttribute("src");
 
-let questionAdded = false;
-const config = { attributes: true, childList: true, subtree: true };
+        downloadAnchor.classList.add("download-link");
+        downloadAnchor.setAttribute("href", mp3Link);
+        downloadAnchor.innerText = "Download";
 
-let myAudio = new Audio(); 
-myAudio.src = chrome.extension.getURL("pinwheel.mp3"); 
-
-function questionAlert(counter) {
-    if(counter < 8) {
-        setTimeout(function() {
-            myAudio.play();
-            ++counter;
-            questionAlert(counter);
-        }, 3000);
+        playBtnContainer.appendChild(downloadAnchor);
+        playBtnClicked = true;
     }
-}
-
-const callback = function(mutationsList, observer) {
-    for(let mutation of mutationsList) {
-        // Inside of the parent will change once the question is added
-        if (mutation.type === 'childList') {
-            questionAlert(0);
-        }
-    }
-};
-
-const observer = new MutationObserver(callback);
-
-observer.observe(item, config);
+});
